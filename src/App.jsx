@@ -100,6 +100,7 @@ function App() {
               const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
               return (
                 <li key={movie.id}>
+                  <img src={"https://image.tmdb.org/t/p/w185" + movie.poster_path } alt="cover" />
                   {movie.title} 
                   {movie.original_title} 
                   <img src={flagUrl} alt={'bandiera '+ flagCode} width='16px' height='12px'/> 
@@ -121,6 +122,7 @@ function App() {
               const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
               return (
                 <li key={show.id}>
+                  <img src={"https://image.tmdb.org/t/p/w185" + show.poster_path} alt="cover" />
                   {show.name} 
                   {show.original_name} 
                   <img src={flagUrl} alt={'bandiera '+ flagCode} width='16px' height='12px'/> 
