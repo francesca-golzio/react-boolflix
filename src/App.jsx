@@ -35,13 +35,16 @@ function App() {
       .then((res) => {
         console.log(res);
         const {results} = res;
-        setFilteredMovies(results)
+        setFilteredMovies(results);
+
+        
       })
       .catch(err => console.error(err));
     console.log(filteredMovies);
 
+    
   }
-
+  
   return (
     <>
 
@@ -55,9 +58,22 @@ function App() {
         <ul>
           {
             filteredMovies.map((movie) => {
+              let flagCode = movie.original_language
+              if (flagCode === 'en') {flagCode = 'gb'}
+              if (flagCode === 'ja') {flagCode = 'jp'}
+              if (flagCode === 'ko') {flagCode = 'kr'}
+              if (flagCode === 'zh') {flagCode = 'cn'}
+              if (flagCode === 'el') {flagCode = 'gl'}
+              if (flagCode === 'he') {flagCode = 'il'}
+              if (flagCode === 'da') {flagCode = 'dk'}
+              /* if (flagCode === 'os') {flagCode = ''} non sono riuscita a capire cosa fosse */
+              const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
               return (
                 <li key={movie.id}>
-                  {movie.title} {movie.original_title} {movie.original_language} {movie.vote_average}
+                  {movie.title} 
+                  {movie.original_title} 
+                  <img src={flagUrl} alt={'bandiera '+ flagCode} width='16px' height='12px'/> 
+                  {movie.vote_average}
                 </li>
               )
             })
