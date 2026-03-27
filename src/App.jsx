@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+
 function App() {
 
   /* Ricerca */
@@ -69,20 +70,22 @@ function App() {
 
   }
 
+  /* Gestisci submit */
   function handleSubmit(e) {
     e.preventDefault();
     GetFilteredMovies();
     GetFilteredTvShows();
   }
 
+  /* Implementa rating (da numero 0-10 a stelle 0-5) */
   function RateToStar(voto, nome) {
     let stelle = [];
     for (let index = 1; index <= voto; index++) {
 
-      stelle = [...stelle, <i className="bi bi-star-fill" key={ `${nome}-${index}` }></i>];
+      stelle = [...stelle, <i className="bi bi-star-fill" key={`${nome}-${index}`}></i>];
       //console.log(stelle);
     }
-    for (let index = 1; index <= (5 - voto); index++){
+    for (let index = 1; index <= (5 - voto); index++) {
       stelle = [...stelle, <i className="bi bi-star" key={`${nome}-${index}-empty`}></i>];
     }
 
@@ -96,12 +99,24 @@ function App() {
   return (
     <>
 
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={searchKey} name="" onChange={handleSearch} />
-          <button >Search</button>
-        </form>
-      </div>
+      <header>
+        <div className="container">
+          
+            <h1>
+              Boolflix
+            </h1>
+          
+
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input type="text" value={searchKey} name="" onChange={handleSearch} />
+              <button className='btn '>Search</button>
+            </form>
+          </div>
+
+        </div>
+      </header>
+
       <div>
         <ul>
           {
