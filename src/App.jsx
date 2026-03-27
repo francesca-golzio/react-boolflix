@@ -82,11 +82,11 @@ function App() {
     let stelle = [];
     for (let index = 1; index <= voto; index++) {
 
-      stelle = [...stelle, <i className="bi bi-star-fill" key={`${nome}-${index}`}></i>];
+      stelle = [...stelle, <i className="bi bi-star-fill" key={`${nome}-${index}`}> </i>];
       //console.log(stelle);
     }
     for (let index = 1; index <= (5 - voto); index++) {
-      stelle = [...stelle, <i className="bi bi-star" key={`${nome}-${index}-empty`}></i>];
+      stelle = [...stelle, <i className="bi bi-star" key={`${nome}-${index}-empty`}> </i>];
     }
 
     return (
@@ -101,11 +101,11 @@ function App() {
 
       <header>
         <div className="container">
-          
-            <h1>
-              Boolflix
-            </h1>
-          
+
+          <h1>
+            Boolflix
+          </h1>
+
 
           <div>
             <form onSubmit={handleSubmit}>
@@ -116,59 +116,84 @@ function App() {
 
         </div>
       </header>
+      <main>
+        <div className='container'>
 
-      <div>
-        <ul>
-          {
-            filteredMovies.map((movie) => {
-              let flagCode = movie.original_language
-              if (flagCode === 'en') { flagCode = 'gb' } /* non posso distinguere tra UK, US, ecc. ho solo la lingua */
-              if (flagCode === 'ja') { flagCode = 'jp' }
-              if (flagCode === 'ko') { flagCode = 'kr' }
-              if (flagCode === 'zh') { flagCode = 'cn' }
-              if (flagCode === 'el') { flagCode = 'gl' }
-              if (flagCode === 'he') { flagCode = 'il' }
-              if (flagCode === 'da') { flagCode = 'dk' }
-              {/* if (flagCode === 'os') {flagCode = ''} non sono riuscita a capire cosa fosse */ }
-              const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
-              return (
-                <li key={movie.id}>
-                  <img src={"https://image.tmdb.org/t/p/w185" + movie.poster_path} alt="cover" />
-                  {movie.title}
-                  {movie.original_title}
-                  <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
-                  {/* {voto = Math.ceil(movie.vote_average / 2)} */}
-                  {RateToStar(Math.ceil(movie.vote_average / 2))}
-                </li>
-              )
-            })
-          }
-          {
-            filteredTvShows.map((show) => {
-              let flagCode = show.original_language
-              if (flagCode === 'en') { flagCode = 'gb' }
-              if (flagCode === 'ja') { flagCode = 'jp' }
-              if (flagCode === 'ko') { flagCode = 'kr' }
-              if (flagCode === 'zh') { flagCode = 'cn' }
-              if (flagCode === 'el') { flagCode = 'gl' }
-              if (flagCode === 'he') { flagCode = 'il' }
-              if (flagCode === 'da') { flagCode = 'dk' }
-              const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
-              return (
-                <li key={show.id}>
-                  <img src={"https://image.tmdb.org/t/p/w185" + show.poster_path} alt="cover" />
-                  {show.name}
-                  {show.original_name}
-                  <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
-                  {/* {Math.ceil(show.vote_average / 2)} */}
-                  {RateToStar(Math.ceil(show.vote_average / 2))}
-                </li>
-              )
-            })
-          }
-        </ul>
-      </div>
+          <div className='container card_deck'>
+            <div className="row g-4">
+              {
+                filteredMovies.map((movie) => {
+                  let flagCode = movie.original_language
+                  if (flagCode === 'en') { flagCode = 'gb' } /* non posso distinguere tra UK, US, ecc. ho solo la lingua */
+                  if (flagCode === 'ja') { flagCode = 'jp' }
+                  if (flagCode === 'ko') { flagCode = 'kr' }
+                  if (flagCode === 'zh') { flagCode = 'cn' }
+                  if (flagCode === 'el') { flagCode = 'gl' }
+                  if (flagCode === 'he') { flagCode = 'il' }
+                  if (flagCode === 'da') { flagCode = 'dk' }
+                  {/* if (flagCode === 'os') {flagCode = ''} non sono riuscita a capire cosa fosse */ }
+                  const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
+                  const posterUrlMovies = `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+                  return (
+                    <div className="col" key={movie.id}>
+                      <div className="card" style={{ backgroundImage: `url(${posterUrlMovies})` }}>
+                        {/* <img src={posterUrl} alt="cover" /> */}
+                        <div className="card-body">
+                          <h5 className="card-title">{movie.title}</h5>
+                          <h6 className="card-subtitle mb-2">{movie.original_title}</h6>
+                          <p className="card-text">info qui</p>
+                          <div className='flagAndStars'>
+                            <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
+                            <div>
+                              <span>
+                                {RateToStar(Math.ceil(movie.vote_average / 2))}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+              {
+                filteredTvShows.map((show) => {
+                  let flagCode = show.original_language
+                  if (flagCode === 'en') { flagCode = 'gb' }
+                  if (flagCode === 'ja') { flagCode = 'jp' }
+                  if (flagCode === 'ko') { flagCode = 'kr' }
+                  if (flagCode === 'zh') { flagCode = 'cn' }
+                  if (flagCode === 'el') { flagCode = 'gl' }
+                  if (flagCode === 'he') { flagCode = 'il' }
+                  if (flagCode === 'da') { flagCode = 'dk' }
+                  const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
+                  const posterUrlShows = `https://image.tmdb.org/t/p/w342${show.poster_path}`
+                  return (
+                    <div className="col" key={show.id}>
+                      <div className="card" style={{ backgroundImage: `url(${posterUrlShows}` }}>
+                        {/* <img src={"https://image.tmdb.org/t/p/w342" + show.poster_path} alt="cover" /> */}
+                        <div className="card-body">
+                          <h5 className="card-title">{show.name}</h5>
+                          <h6 className="card-subtitle mb-2">{show.original_name}</h6>
+                          <p className="card-text">info qui</p>
+                          <div className='flagAndStars'>
+                            <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
+                            <span>
+                              {RateToStar(Math.ceil(show.vote_average / 2))}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
 
+                })
+              }
+            </div>
+          </div>
+
+        </div>
+      </main>
     </>
   )
 }
