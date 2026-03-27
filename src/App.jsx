@@ -95,17 +95,6 @@ function App() {
       </>
     )
   }
-             
-  /* Gestisci effetto Hover sulle card */
-    function handleCardOver() {
-      const cardEl = document.querySelector('.col > div.card')
-      const cardDetailsEl = document.querySelector('.card-title')
-
-      cardEl.addEventListener('mouseover', () => {
-        cardDetailsEl.style.visibility = 'visible';
-      })
-    }
-
 
   return (
     <>
@@ -147,63 +136,64 @@ function App() {
                   const posterUrlMovies = `https://image.tmdb.org/t/p/w342${movie.poster_path}`
                   return (
                     <div className="col col-12 col-md-6 col-lg-4 col-xl-3" id={movie.id} key={movie.id}>
-                      <div className="card" style={{ backgroundImage: `url(${posterUrlMovies})` }}>
-                        {/* <img src={posterUrl} alt="cover" /> */}
-                        <div className="card-body">
-                          <h5 className="card-title">{movie.title}</h5>
-                          <h6 className="card-subtitle mb-2">{movie.original_title}</h6>
-                          <p className="card-text">{movie.overview}</p>
-                          <div className='flagAndStars'>
-                            <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
-                            <span>
-                              {RateToStar(Math.ceil(movie.vote_average / 2))}
-                            </span>
-                          </div>
+                      <div className="card">
+                          <img className='card-img' src={posterUrlMovies} alt="cover" />
+                        {/*  <HandleCardOver /> */}
+                        <div className="card-img-overlay" >
+                        <h5 className="card-title">{movie.title}</h5>
+                        <h6 className="card-subtitle mb-2">{movie.original_title}</h6>
+                        <p className="card-text">{movie.overview}</p>
+                        <div className='flagAndStars'>
+                          <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
+                          <span>
+                            {RateToStar(Math.ceil(movie.vote_average / 2))}
+                          </span>
                         </div>
                       </div>
                     </div>
-                  )
+                    </div>
+            )
                 })
               }
-              {
-                filteredTvShows.map((show) => {
-                  let flagCode = show.original_language
-                  if (flagCode === 'en') { flagCode = 'gb' }
-                  if (flagCode === 'ja') { flagCode = 'jp' }
-                  if (flagCode === 'ko') { flagCode = 'kr' }
-                  if (flagCode === 'zh') { flagCode = 'cn' }
-                  if (flagCode === 'el') { flagCode = 'gl' }
-                  if (flagCode === 'he') { flagCode = 'il' }
-                  if (flagCode === 'da') { flagCode = 'dk' }
-                  if (flagCode === 'os') { flagCode = 'ir' }
-                  const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
-                  const posterUrlShows = `https://image.tmdb.org/t/p/w342${show.poster_path}`
-                  return (
-                    <div className="col col-12 col-md-6 col-lg-4 col-xl-3" key={show.id}>
-                      <div className="card" style={{ backgroundImage: `url(${posterUrlShows}` }}>
-                        {/* <img src={"https://image.tmdb.org/t/p/w342" + show.poster_path} alt="cover" /> */}
-                        <div className="card-body">
-                          <h5 className="card-title">{show.name}</h5>
-                          <h6 className="card-subtitle mb-2">{show.original_name}</h6>
-                          <p className="card-text">{show.overview}</p>
-                          <div className='flagAndStars'>
-                            <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
-                            <span>
-                              {RateToStar(Math.ceil(show.vote_average / 2))}
-                            </span>
-                          </div>
+            {
+              filteredTvShows.map((show) => {
+                let flagCode = show.original_language
+                if (flagCode === 'en') { flagCode = 'gb' }
+                if (flagCode === 'ja') { flagCode = 'jp' }
+                if (flagCode === 'ko') { flagCode = 'kr' }
+                if (flagCode === 'zh') { flagCode = 'cn' }
+                if (flagCode === 'el') { flagCode = 'gl' }
+                if (flagCode === 'he') { flagCode = 'il' }
+                if (flagCode === 'da') { flagCode = 'dk' }
+                if (flagCode === 'os') { flagCode = 'ir' }
+                const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
+                const posterUrlShows = `https://image.tmdb.org/t/p/w342${show.poster_path}`
+                return (
+                  <div className="col col-12 col-md-6 col-lg-4 col-xl-3" key={show.id}>
+                    <div className="card" /* style={{ backgroundImage: `url(${posterUrlShows}` }} */>
+                      <img src={posterUrlShows} className="card-img" alt="cover" />
+                      <div className="card-img-overlay">
+                        <h5 className="card-title">{show.name}</h5>
+                        <h6 className="card-subtitle mb-2">{show.original_name}</h6>
+                        <p className="card-text">{show.overview}</p>
+                        <div className='flagAndStars'>
+                          <img src={flagUrl} alt={'bandiera ' + flagCode} width='16px' height='12px' />
+                          <span>
+                            {RateToStar(Math.ceil(show.vote_average / 2))}
+                          </span>
                         </div>
                       </div>
                     </div>
-                  )
+                  </div>
+                )
 
-                })
-              }
-            </div>
+              })
+            }
           </div>
-
         </div>
-      </main>
+
+      </div>
+    </main >
     </>
   )
 }
