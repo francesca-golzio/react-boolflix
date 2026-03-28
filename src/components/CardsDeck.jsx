@@ -1,12 +1,7 @@
 import { useGlobal } from "../contexts/GlobalContext"
 
 export default function CardsDeck() {
-  const { GetFilteredMovies,
-    setFilteredMovies,
-    filteredMovies,
-    GetFilteredTvShows,
-    setFilteredTvShows,
-    filteredTvShows, } = useGlobal();
+  const { filteredMovies, filteredTvShows, } = useGlobal();
 
   /* Implementa rating (da numero 0-10 a stelle 0-5) */
   function RateToStar(voto, nome) {
@@ -48,7 +43,6 @@ export default function CardsDeck() {
                 <div className="col col-12 col-md-6 col-lg-4 col-xl-3" id={movie.id} key={movie.id}>
                   <div className="card">
                     <img className='card-img' src={posterUrlMovies} alt="cover" />
-                    {/*  <HandleCardOver /> */}
                     <div className="card-img-overlay" >
                       <h5 className="card-title">{movie.title}</h5>
                       <h6 className="card-subtitle mb-2">{movie.original_title}</h6>
@@ -80,7 +74,7 @@ export default function CardsDeck() {
               const posterUrlShows = `https://image.tmdb.org/t/p/w342${show.poster_path}`
               return (
                 <div className="col col-12 col-md-6 col-lg-4 col-xl-3" key={show.id}>
-                  <div className="card" /* style={{ backgroundImage: `url(${posterUrlShows}` }} */>
+                  <div className="card">
                     <img src={posterUrlShows} className="card-img" alt="cover" />
                     <div className="card-img-overlay">
                       <h5 className="card-title">{show.name}</h5>
