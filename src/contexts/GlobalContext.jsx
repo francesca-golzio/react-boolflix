@@ -3,8 +3,10 @@ import { createContext, useContext, useState } from 'react'
 const GlobalContext = createContext();
 
 function GlobalProvider({ children }) {
-  //qui metterò le variabili di stato da passare ai children
 
+  /* Ricerca */
+  const [searchKey, setSearchKey] = useState('');
+  
   /* Filtra Film */
   const MOVIE_DB_API_KEY = import.meta.env.MOVIE_DB_API_KEY;
   const search_movies_endpoint = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_DB_API_KEY}&query=`;
@@ -25,12 +27,12 @@ function GlobalProvider({ children }) {
     fetch(search_movies_endpoint + searchKey, options)
       .then(res => res.json())
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         const { results } = res;
         setFilteredMovies(results);
       })
       .catch(err => console.error(err));
-    console.log(filteredMovies);
+    //console.log(filteredMovies);
 
   }
 
@@ -53,18 +55,20 @@ function GlobalProvider({ children }) {
     fetch(search_tv_shows_endpoint + searchKey, options)
       .then(res => res.json())
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         const { results } = res;
         setFilteredTvShows(results);
       })
       .catch(err => console.error(err));
-    console.log(filteredTvShows);
+    //console.log(filteredTvShows);
   }
 
 
   return (
     <GlobalContext.Provider
       value={{
+        searchKey, 
+        setSearchKey,
         GetFilteredMovies,
         setFilteredMovies,
         filteredMovies,

@@ -1,8 +1,13 @@
-/* import { useGlobal } from "../contexts/GlobalContext" */
+import { useGlobal } from "../contexts/GlobalContext"
 import HeaderSearchbar from "./HeaderSearchBar";
 
 export default function AppHeader() {
-  /* const { handleSubmit, searchKey, handleSearch } = useGlobal; */
+  const { handleSubmit, searchKey, handleSearch, GetFilteredMovies,
+    setFilteredMovies,
+    filteredMovies,
+    GetFilteredTvShows,
+    setFilteredTvShows,
+    filteredTvShows} = useGlobal();
 
   return (
     <>

@@ -2,10 +2,15 @@ import { useGlobal } from "../contexts/GlobalContext"
 import { useState } from 'react';
 
 export default function HeaderSearchbar() {
-  
+  const { setSearchKey, searchKey, GetFilteredMovies,
+    setFilteredMovies,
+    filteredMovies,
+    GetFilteredTvShows,
+    setFilteredTvShows,
+    filteredTvShows, } = useGlobal();
 
   /* Ricerca */
-  const [searchKey, setSearchKey] = useState('');
+ /*  const [searchKey, setSearchKey] = useState(''); */
 
   function handleSearch(e) {
     e.preventDefault();
