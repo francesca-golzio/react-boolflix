@@ -56,7 +56,26 @@ function GlobalProvider({ children }) {
       })
       .catch(err => console.error(err));
   }
- 
+
+  /* Implementa rating (da numero 0-10 a stelle 0-5) */
+  function RateToStar(voto, nome) {
+    let stelle = [];
+    for (let index = 1; index <= voto; index++) {
+
+      stelle = [...stelle, <i className="bi bi-star-fill" key={`${nome}-${index}`}> </i>];
+      //console.log(stelle);
+    }
+    for (let index = 1; index <= (5 - voto); index++) {
+      stelle = [...stelle, <i className="bi bi-star" key={`${nome}-${index}-empty`}> </i>];
+    }
+
+    return (
+      <>
+        {stelle}
+      </>
+    )
+  }
+
 
   return (
     <GlobalContext.Provider
@@ -69,6 +88,7 @@ function GlobalProvider({ children }) {
         GetFilteredTvShows,
         setFilteredTvShows,
         filteredTvShows,
+        RateToStar
       }}
     >
       {children}
