@@ -1,6 +1,5 @@
 import { GlobalProvider, useGlobal } from './contexts/GlobalContext';
 import AppHeader from './components/AppHeader';
-import HeaderSearchbar from './components/HeaderSearchBar';
 import CardsDeck from './components/CardsDeck';
 
 
@@ -9,9 +8,7 @@ function App() {
   return (
     <>
       <GlobalProvider>
-        <AppHeader>
-          <HeaderSearchbar />
-        </AppHeader>
+        <AppHeader />
 
         <main>
           <div className='container'>
