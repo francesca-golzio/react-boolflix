@@ -2,6 +2,21 @@ import { useGlobal } from "../contexts/GlobalContext"
 
 export default function CardsDeck() {
   const { filteredMovies, filteredTvShows, RateToStar } = useGlobal();
+  let flagCode;
+  let flagUrl;
+
+  function handleFlags(video) {
+    flagCode = video.original_language
+    if (flagCode === 'en') { flagCode = 'gb' } /* non posso distinguere tra UK, US, ecc. ho solo la lingua */
+    if (flagCode === 'ja') { flagCode = 'jp' }
+    if (flagCode === 'ko') { flagCode = 'kr' }
+    if (flagCode === 'zh') { flagCode = 'cn' }
+    if (flagCode === 'el') { flagCode = 'gl' }
+    if (flagCode === 'he') { flagCode = 'il' }
+    if (flagCode === 'da') { flagCode = 'dk' }
+    if (flagCode === 'os') { flagCode = 'ir' }
+    flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
+  }
 
 
   return (
@@ -10,17 +25,11 @@ export default function CardsDeck() {
         <div className="row g-3 cards_row">
           {
             filteredMovies.map((movie) => {
-              let flagCode = movie.original_language
-              if (flagCode === 'en') { flagCode = 'gb' } /* non posso distinguere tra UK, US, ecc. ho solo la lingua */
-              if (flagCode === 'ja') { flagCode = 'jp' }
-              if (flagCode === 'ko') { flagCode = 'kr' }
-              if (flagCode === 'zh') { flagCode = 'cn' }
-              if (flagCode === 'el') { flagCode = 'gl' }
-              if (flagCode === 'he') { flagCode = 'il' }
-              if (flagCode === 'da') { flagCode = 'dk' }
-              if (flagCode === 'os') { flagCode = 'ir' }
-              const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
+              /* Handle flags */
+              handleFlags(movie);
+              /* Get poster */
               const posterUrlMovies = `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+              
               return (
                 <div className="col col-12 col-md-6 col-lg-4 col-xl-3" id={movie.id} key={movie.id}>
                   <div className="card">
@@ -43,16 +52,9 @@ export default function CardsDeck() {
           }
           {
             filteredTvShows.map((show) => {
-              let flagCode = show.original_language
-              if (flagCode === 'en') { flagCode = 'gb' }
-              if (flagCode === 'ja') { flagCode = 'jp' }
-              if (flagCode === 'ko') { flagCode = 'kr' }
-              if (flagCode === 'zh') { flagCode = 'cn' }
-              if (flagCode === 'el') { flagCode = 'gl' }
-              if (flagCode === 'he') { flagCode = 'il' }
-              if (flagCode === 'da') { flagCode = 'dk' }
-              if (flagCode === 'os') { flagCode = 'ir' }
-              const flagUrl = 'https://flagcdn.com/16x12/' + flagCode + '.png'
+              /* Handle flags */
+              handleFlags(show);
+              /* Get poster */
               const posterUrlShows = `https://image.tmdb.org/t/p/w342${show.poster_path}`
               return (
                 <div className="col col-12 col-md-6 col-lg-4 col-xl-3" key={show.id}>
