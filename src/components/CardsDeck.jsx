@@ -32,7 +32,7 @@ export default function CardsDeck() {
               
               return (
                 <div className="col col-12 col-md-6 col-lg-4 col-xl-3" id={movie.id} key={movie.id}>
-                  <div className="card">
+                  <div className="card movie_card">
                     <img className='card-img' src={posterUrlMovies} alt={"# " + movie.title + " | missing cover..."} />
                     <div className="card-img-overlay" >
                       <h5 className="card-title">{movie.title}</h5>
@@ -58,7 +58,7 @@ export default function CardsDeck() {
               const posterUrlShows = `https://image.tmdb.org/t/p/w342${show.poster_path}`
               return (
                 <div className="col col-12 col-md-6 col-lg-4 col-xl-3" key={show.id}>
-                  <div className="card">
+                  <div className="card show_card">
                     <img src={posterUrlShows} className="card-img" alt={"# " + show.name + " | missing cover..."} />
                     <div className="card-img-overlay">
                       <h5 className="card-title">{show.name}</h5>
